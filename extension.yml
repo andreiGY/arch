@@ -1,0 +1,42 @@
+schema_version: "1.0"
+
+extension:
+  id: "my-ext"                          # Lowercase, alphanumeric + hyphens only
+  name: "My Extension"
+  version: "1.0.0"                      # Semantic versioning
+  description: "My custom extension"
+  author: "Your Name"
+  repository: "https://github.com/you/spec-kit-my-ext"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=0.1.0"            # Minimum spec-kit version
+  tools:                                # Optional: External tools required
+    - name: "my-tool"
+      required: true
+      version: ">=1.0.0"
+  commands:                             # Optional: Core commands needed
+    - "speckit.tasks"
+
+provides:
+  commands:
+    - name: "speckit.my-ext.hello"      # Must follow pattern: speckit.{ext-id}.{cmd}
+      file: "commands/hello.md"
+      description: "Say hello"
+      aliases: ["speckit.my-ext.hi"]    # Optional aliases, same pattern
+
+  config:                               # Optional: Config files
+    - name: "my-ext-config.yml"
+      template: "my-ext-config.template.yml"
+      description: "Extension configuration"
+      required: false
+
+hooks:                                  # Optional: Integration hooks
+  after_tasks:
+    command: "speckit.my-ext.hello"
+    optional: true
+    prompt: "Run hello command?"
+
+tags:                                   # Optional: For catalog search
+  - "example"
+  - "utility"
