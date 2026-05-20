@@ -1,42 +1,33 @@
 schema_version: "1.0"
 
 extension:
-  id: "my-ext"                          # Lowercase, alphanumeric + hyphens only
-  name: "My Extension"
+  id: "arch_scanner"                          # Lowercase, alphanumeric + hyphens only
+  name: "Architecture Scanner"
   version: "1.0.0"                      # Semantic versioning
-  description: "My custom extension"
-  author: "Your Name"
+  description: "Extension for scanning code to discover business objects and interactions"
+  author: "Gladarenko Andrei"
   repository: "https://github.com/you/spec-kit-my-ext"
   license: "MIT"
 
 requires:
-  speckit_version: ">=0.1.0"            # Minimum spec-kit version
-  tools:                                # Optional: External tools required
-    - name: "my-tool"
-      required: true
-      version: ">=1.0.0"
+  speckit_version: ">=0.8.9.dev0"            # Minimum spec-kit version
   commands:                             # Optional: Core commands needed
-    - "speckit.tasks"
+    - "speckit.implement"
 
 provides:
   commands:
-    - name: "speckit.my-ext.hello"      # Must follow pattern: speckit.{ext-id}.{cmd}
-      file: "commands/hello.md"
-      description: "Say hello"
-      aliases: ["speckit.my-ext.hi"]    # Optional aliases, same pattern
+    - name: "speckit.arch_scanner.business_objects"      # Must follow pattern: speckit.{ext-id}.{cmd}
+      file: "commands/bo_scanner.md"
+      description: "Scan for business objects"
+      aliases: ["speckit.arch_scanner.bo_scan"]    # Optional aliases, same pattern
 
-  config:                               # Optional: Config files
-    - name: "my-ext-config.yml"
-      template: "my-ext-config.template.yml"
-      description: "Extension configuration"
-      required: false
 
 hooks:                                  # Optional: Integration hooks
-  after_tasks:
+  after_implement:
     command: "speckit.my-ext.hello"
     optional: true
     prompt: "Run hello command?"
 
 tags:                                   # Optional: For catalog search
-  - "example"
-  - "utility"
+  - "architecture"
+  - "business-objects"
