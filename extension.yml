@@ -6,7 +6,7 @@ extension:
   version: "1.0.0"                      # Semantic versioning
   description: "Extension for scanning code to discover business objects and interactions"
   author: "Gladarenko Andrei"
-  repository: "https://github.com/you/spec-kit-my-ext"
+  repository: "https://github.com/andreiGY/arch"
   license: "MIT"
 
 requires:
@@ -18,7 +18,7 @@ provides:
   commands:
     - name: "speckit.arch_scanner.business_objects"      # Must follow pattern: speckit.{ext-id}.{cmd}
       file: "commands/bo_scanner.md"
-      description: "Scan for business objects"
+      description: "Scans for business objects"
       aliases: ["speckit.arch_scanner.bo_scan"]    # Optional aliases, same pattern
 
 
