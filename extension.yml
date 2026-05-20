@@ -1,10 +1,10 @@
 schema_version: "1.0"
 
 extension:
-  id: "arch_scanner"                          # Lowercase, alphanumeric + hyphens only
+  id: "arch"                          # Lowercase, alphanumeric + hyphens only
   name: "Architecture Scanner"
   version: "1.0.0"                      # Semantic versioning
-  description: "Extension for scanning code to discover business objects and interactions"
+  description: "arch. :fox_face Extension for scanning code to discover business objects and interactions"
   author: "Gladarenko Andrei"
   repository: "https://github.com/andreiGY/arch"
   license: "MIT"
@@ -16,17 +16,10 @@ requires:
 
 provides:
   commands:
-    - name: "speckit.arch_scanner.business_objects"      # Must follow pattern: speckit.{ext-id}.{cmd}
+    - name: "speckit.arch.scanner"      # Must follow pattern: speckit.{ext-id}.{cmd}
       file: "commands/bo_scanner.md"
       description: "Scans for business objects"
-      aliases: ["speckit.arch_scanner.bo_scan"]    # Optional aliases, same pattern
 
-
-hooks:                                  # Optional: Integration hooks
-  after_implement:
-    command: "speckit.my-ext.hello"
-    optional: true
-    prompt: "Run hello command?"
 
 tags:                                   # Optional: For catalog search
   - "architecture"

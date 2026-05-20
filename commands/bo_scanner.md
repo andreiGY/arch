@@ -58,7 +58,7 @@ Execute the following steps sequentially to map the business entities. For every
 
 ## Output Generation Rules
 
-After completing the analysis, generate a report in Markdown format using the following structure:
+After completing the analysis, generate a report in Markdown format using the following structure and save it to file named ARCH.md in the root of the project.
 
 ### 1. Extracted Output Format
 Present your findings in a structured format:
