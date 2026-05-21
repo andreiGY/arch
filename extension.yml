@@ -4,7 +4,7 @@ extension:
   id: "arch"                          # Lowercase, alphanumeric + hyphens only
   name: "Architecture Scanner"
   version: "1.0.0"                      # Semantic versioning
-  description: "arch. :fox_face Extension for scanning code to discover business objects and interactions"
+  description: "arch. &#129418; Extension for scanning code to discover business objects and interactions"
   author: "Gladarenko Andrei"
   repository: "https://github.com/andreiGY/arch"
   license: "MIT"
@@ -17,7 +17,7 @@ requires:
 provides:
   commands:
     - name: "speckit.arch.scanner"      # Must follow pattern: speckit.{ext-id}.{cmd}
-      file: "commands/bo_scanner.md"
+      file: "commands/scanner.md"
       description: "Scans for business objects"
 
 

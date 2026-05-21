@@ -1,5 +1,5 @@
 ---
-description: "Say hello command"
+description: "Scans repo to discover business objects and ingoing and outgoing flows"
 
 ---
 
@@ -58,33 +58,41 @@ Execute the following steps sequentially to map the business entities. For every
 
 ## Output Generation Rules
 
-After completing the analysis, generate a report in Markdown format using the following structure and save it to file named ARCH.md in the root of the project.
+After completing the analysis, generate a report in Markdown format using the following table structures. DO NOT add any additional or supplementary information.
+Save report to file named ARCH.md . If file already exists then rewrite it.
 
-### 1. Extracted Output Format
-Present your findings in a structured format:
+### Extracted Output Format
 
 ```markdown
 # Business Entity Discovery Report: [Microservice Name]
 
-## 1. Exposed APIs (Produced to Enterprise)
-* **API:** `[HTTP Method] [Path]`
-  * **Consumes (Request):** `[ClassName]` -> `[List of 3-5 core business fields]`
-  * **Produces (Response):** `[ClassName]` -> `[List of 3-5 core business fields]`
+## 1. Exposed APIs (Synchronous Inbound)
+| HTTP Method | API Endpoint | Consumes (Request DTO) | Produces (Response DTO) | Key Business Fields (3-5 attributes) |
+|-------------|--------------|------------------------|-------------------------|--------------------------------------|
+| e.g., POST  | `/api/v1/orders` | `CreateOrderReq` | `OrderResponse` | `orderId, customerId, totalAmount` |
 
-## 2. Downstream Dependencies (Consumed from Enterprise)
-* **System/Client:** `[FeignClient Name or External URL]`
-  * **Entity Consumed:** `[ClassName]` -> `[List of 3-5 core business fields]`
+## 2. Downstream Dependencies (Synchronous Outbound)
+| Downstream System / Client | Entity Consumed (DTO) | Key Business Fields (3-5 attributes) |
+|----------------------------|-----------------------|--------------------------------------|
+| e.g., `PaymentFeignClient` | `PaymentStatusDTO`    | `transactionId, status, timestamp`   |
 
 ## 3. Asynchronous Events (Event-Driven Boundaries)
-* **Consumes Events:** 
-  * `[EventClassName]` (Listens on: `[Topic/Queue Name]`)
-* **Produces Events:**
-  * `[EventClassName]` (Publishes to: `[Topic/Queue Name]`)
+| Direction | Topic / Queue / Channel | Event Entity Class | Key Business Fields (3-5 attributes) |
+|-----------|-------------------------|--------------------|--------------------------------------|
+| Consumes  | `inventory.stock.topic` | `StockUpdateEvent` | `sku, availableQuantity, warehouseId`|
+| Produces  | `order.created.topic`   | `OrderPlacedEvent` | `orderId, userId, items`             |
 
 ## 4. Core Domain Models (Internal State Owned)
-* `[EntityClassName]` (Type: e.g., Relational DB / MongoDB)
-  * **Fields:** `[List core business fields]`
+| Entity Class | Data Store Type | Key Business Fields (3-5 attributes) |
+|--------------|-----------------|--------------------------------------|
+| `Order`      | Relational (JPA)| `id, customerId, status, createdAt`  |
 ```
+
+### Constraints and Guidelines for the AI
+* **Ignore Framework Boilerplate:** Ignore Spring configuration files, security configs, utility classes, and standard Java types (String, Integer, Map). Focus *only* on custom POJOs/Records that represent business data.
+* **Deep Inspection:** When you identify a DTO or Entity class name, you MUST open that specific `.java` file to extract its attributes/fields for the "Key Business Fields" column. Do not just guess the fields.
+* **Resolve Generics:** If a method returns `ResponseEntity<Page<OrderDTO>>`, the business entity is `OrderDTO`. Unwrap the wrappers.
+* **Empty States:** If a microservice does not have one of these boundaries (e.g., no asynchronous events), output the table with a single row stating *"None discovered"*.
 
 ### Constraints and Guidelines for the AI
 * **Ignore Framework Boilerplate:** Ignore Spring configuration files, security configs, utility classes, and standard Java types (String, Integer, Map). Focus *only* on custom POJOs/Records that represent business data.
