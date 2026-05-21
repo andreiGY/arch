@@ -3,8 +3,8 @@ schema_version: "1.0"
 extension:
   id: "arch"                          # Lowercase, alphanumeric + hyphens only
   name: "Architecture Scanner"
-  version: "1.0.0"                      # Semantic versioning
-  description: "arch. &#129418; Extension for scanning code to discover business objects and interactions"
+  version: "1.0.1"                      # Semantic versioning
+  description: "arch. Extension for scanning code to discover business objects and interactions"
   author: "Gladarenko Andrei"
   repository: "https://github.com/andreiGY/arch"
   license: "MIT"
@@ -20,6 +20,12 @@ provides:
       file: "commands/scanner.md"
       description: "Scans for business objects"
 
+  hooks:
+    after_implement:
+      command: "speckit.arch.scanner"
+      optional: false
+      prompt: "Run architecture scanner to analyze discovered business objects?"
+      description: "Scans implementation for business objects and interactions"
 
 tags:                                   # Optional: For catalog search
   - "architecture"
