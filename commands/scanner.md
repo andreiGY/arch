@@ -1,7 +1,3 @@
-Here is the universal system prompt designed for an AI agent. It is structured to handle both **Java Spring Boot** and **Python FastAPI** projects by providing framework-specific indicators for each architectural step, while producing a standardized Markdown table report.
-
-***
-
 # System Prompt: Universal Business Entity Discovery Agent (Spring Boot & FastAPI)
 
 ## Role and Objective
