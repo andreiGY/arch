@@ -1,17 +1,17 @@
-# Arch extension
+# Расширение Arch
 
-This extension aimed to scan you project to gather infromation for enterprise architecture observability purpose.
-It generates report file in Markdown format that contains:
+Данное расширение предназначено для сканирования проекта с целью сбора информации для обеспечения наблюдаемости корпоративной архитектуры.
+Оно генерирует файл отчёта в формате Markdown, который содержит:
 
 - API
-- business logic entities
-- mapping of bussines entities to API
+- сущности бизнес-логики
+- сопоставление бизнес-сущностей с API
 
-## Installation instruction
+## Инструкция по установке
 
-### For local installation
+### Локальная установка
 
-speckit install extension (to current project)
+Установка расширения (в текущий проект)
 
 ```bash
 
@@ -20,7 +20,7 @@ specify extension list
 
 ```
 
-speckit remove extension (from current project)
+Удаление расширения (из текущего проекта)
 
 ```bash
 
@@ -28,13 +28,13 @@ specify extension remove arch
 
 ```
 
-Full guide is [here](https://github.com/github/spec-kit/blob/main/extensions/EXTENSION-DEVELOPMENT-GUIDE.md)
+Полное руководство доступно [здесь](https://github.com/github/spec-kit/blob/main/extensions/EXTENSION-DEVELOPMENT-GUIDE.md)
 
-## How to use
+## Использование
 
-By default, extension configured to be called autmatically just after implementation task is completed.
-You can change this behavior setting *"optional"* param of block *"hooks"* to *"true"* in configuration file **extention.yml**
+По умолчанию расширение настроено на автоматический вызов сразу после завершения задачи реализации.
+Вы можете изменить это поведение, установив параметр *"optional"* блока *"hooks"* в значение *"true"* в файле конфигурации **extention.yml**
 
-## Example of report
+## Пример отчёта
 
-![Report example](ARCH.png "ARCH.md")
+![Пример отчёта](ARCH.png "ARCH.md")
